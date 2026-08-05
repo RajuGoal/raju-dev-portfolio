@@ -1,0 +1,38 @@
+{
+  "name": "blueprint-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.3.3",
+    "framer-motion": "^11.18.2",
+    "gsap": "^3.12.5",
+    "highlight.js": "^11.11.1",
+    "lucide-react": "^0.446.0",
+    "pdfjs-dist": "^4.10.38",
+    "qrcode": "^1.5.4",
+    "qrcode.react": "^3.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-markdown": "^9.1.0",
+    "recharts": "^2.15.4",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vite": "^5.4.8",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-pwa": "^0.20.5"
+  }
+}

@@ -1,0 +1,396 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Root Theme Variables
+========================================================= */
+
+:root {
+  --accent: #f59e0b;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-base: #f8fafc;
+  --bg-surface: #ffffff;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-base: #020617;
+  --bg-surface: #0f172a;
+  --text-primary: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+}
+
+/* =========================================================
+   Global Styles
+========================================================= */
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0B1E3A;
+  background-color: var(--bg-base, #0B1E3A);
+  color: #EDF2FA;
+  color: var(--text-primary, #EDF2FA);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =========================================================
+   Glass Surface
+========================================================= */
+
+.glass-surface {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+}
+
+[data-glass="on"] .glass-surface {
+  background-color: color-mix(in srgb, var(--bg-surface) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid color-mix(
+    in srgb,
+    var(--accent) 20%,
+    var(--border-color)
+  );
+}
+
+/* =========================================================
+   Scrollbar
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B1E3A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2D4A73;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFA94D;
+}
+
+/* =========================================================
+   Typing Cursor
+========================================================= */
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  margin-left: 2px;
+  background: #FFA94D;
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   Corner Brackets
+========================================================= */
+
+.corner-brackets {
+  position: relative;
+}
+
+.corner-brackets::before,
+.corner-brackets::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #FFA94D;
+  opacity: 0.7;
+}
+
+.corner-brackets::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.corner-brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* =========================================================
+   Accessibility
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   Animations
+========================================================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.25s ease forwards;
+}
+
+/* =========================================================
+   Particle Explosion
+========================================================= */
+
+.explode-particle {
+  animation: particle-explode 0.6s ease-out forwards;
+}
+
+@keyframes particle-explode {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy))
+      )
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   Marquee Animation
+========================================================= */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button {
+    cursor: none;
+  }
+}
+
+/* Font scaling */
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
+/* Visible focus indicators — never remove outline without replacing it */
+:focus-visible {
+  outline: 2px solid var(--accent, #f59e0b);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — hidden until focused via Tab */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  background: var(--accent, #f59e0b);
+  color: #0f172a;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 10000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* Screen-reader-only content — visually hidden, still announced */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode */
+[data-high-contrast="on"] {
+  --bg-base: #000000;
+  --bg-surface: #000000;
+  --text-primary: #ffffff;
+  --text-muted: #e2e8f0;
+  --border-color: #ffffff;
+  --accent: #ffff00;
+}
+[data-high-contrast="on"] * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+[data-high-contrast="on"] img {
+  filter: contrast(1.2);
+}
+
+/* Reduced motion — disables/shortens all animation & transitions */
+[data-reduced-motion="on"] *,
+[data-reduced-motion="on"] *::before,
+[data-reduced-motion="on"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Respect OS-level setting too, independent of the app's own toggle */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Aurora background blobs */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+[data-theme="light"] .aurora-blob {
+  opacity: 0.22;
+}
+
+.aurora-blob-1 {
+  width: 45vw;
+  height: 45vw;
+  top: -10%;
+  left: -10%;
+  background: var(--accent);
+  animation: aurora-drift-1 22s ease-in-out infinite;
+}
+
+.aurora-blob-2 {
+  width: 38vw;
+  height: 38vw;
+  top: 30%;
+  right: -12%;
+  background: #38bdf8;
+  animation: aurora-drift-2 26s ease-in-out infinite;
+}
+
+.aurora-blob-3 {
+  width: 40vw;
+  height: 40vw;
+  bottom: -15%;
+  left: 20%;
+  background: #a78bfa;
+  animation: aurora-drift-3 30s ease-in-out infinite;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(8vw, 6vh) scale(1.15); }
+  66%      { transform: translate(-4vw, 10vh) scale(0.9); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-10vw, 8vh) scale(0.85); }
+  66%      { transform: translate(-4vw, -6vh) scale(1.1); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(6vw, -8vh) scale(1.1); }
+  66%      { transform: translate(10vw, 4vh) scale(0.95); }
+}
+
+/* Respect reduced motion — from your Accessibility section */
+[data-reduced-motion="on"] .aurora-blob {
+  animation: none !important;
+}
