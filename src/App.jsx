@@ -12,7 +12,7 @@ import UpdatePrompt from "./components/common/UpdatePrompt";
 import Navbar from "./components/layout/Navbar";
 
 // NEW BACKGROUND
-import AuroraBackground from "./components/background/AuroraBackground";
+import AuroraBackground from "./components/backgrounds/AuroraBackground";
 
 // NEW IMPORT
 import PremiumExtras from "./components/extras/PremiumExtras.jsx";
